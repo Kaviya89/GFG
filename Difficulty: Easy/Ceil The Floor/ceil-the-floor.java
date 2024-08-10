@@ -25,31 +25,23 @@ public class Main {
 // } Driver Code Ends
 
 
+
+
 // User function Template for Java
 
 class Solution {
     public int[] getFloorAndCeil(int x, int[] arr) {
-        // code here
-        Arrays.sort(arr);
-        int start = 0;
-        int end = arr.length-1;
-        int f = -1;
-        int c = -1;
-        while(start <= end){
-            int mid = (start + end)/2;
-            if(arr[mid] < x){
-                f = arr[mid];
-                start = mid+1;
+        int floor = -1;
+        int ceil = -1; 
+        for(int i = 0 ; i < arr.length ; i++){
+            if(arr[i] <= x && floor <= arr[i]){
+                floor = arr[i];
             }
-            else if(arr[mid] > x){
-                c = arr[mid];
-                end = mid-1;
-                }
-            else{
-                return new int[] {x , x};
+            if(arr[i] >= x ){
+                if(ceil == -1)ceil = arr[i];
+                else if(ceil >= arr[i])ceil = arr[i];
             }
-            }
-            
-    return new int[] {f , c};
+        } 
+        return new int[]{floor,ceil};
     }
 }
