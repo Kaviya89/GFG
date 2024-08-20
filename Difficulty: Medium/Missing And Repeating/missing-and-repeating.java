@@ -31,24 +31,20 @@ class GFG {
 
 class Solve {
     int[] findTwoElement(int arr[], int n) {
-        // code here 
-        for (int i = 0; i < n; i++) {
-            while (arr[i] != arr[arr[i] - 1]) {
-                // Swap arr[i] with the element at its correct position
-                int correctIndex = arr[i] - 1;
-                int temp = arr[i];
-                arr[i] = arr[correctIndex];
-                arr[correctIndex] = temp;
-            }
+        // code here
+        int hash[] = new int[n+1];
+        
+        for(int i=0; i<n; i++){
+            hash[arr[i]]++;
         }
-        int[] k = new int[2];
-        for(int j=0; j<n;j++){
-            if(arr[j]!=j+1){
-                k[0]=arr[j];
-                k[1]=j+1;
-                break;
-            }
+        int repeat = -1, miss = -1;
+        for(int i=1; i<=n; i++){
+            if(hash[i]==2) repeat = i;
+            else if(hash[i]==0) miss = i;
+            
+            if(repeat !=-1 && miss!=-1) break;
         }
-        return k;
+        int ans[] = {repeat, miss};
+        return ans;
     }
 }
